@@ -1,0 +1,3 @@
+---
+
+redis_apt_target: '{{ ansible_distribution_release }}{% if redis_use_apt_backports %}-backports{% endif %}'
