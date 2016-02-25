@@ -15,8 +15,8 @@ Role Variables
 --------------
 
   - Default config file is defined in [default vars](defaults/main.yml). All config vars are prefixed with "redisconf\_".
-  - redis\_apt\_backports: set true to install Redis from backports (default is false).
-  - redis\_apt\_target: target used by apt module. DO NOT EDIT! You must edit redis\_apt\_backports
+  - `redis_apt_backports`: set true to install Redis from backports (default is false).
+  - `redis_apt_target`: target used by apt module. DO NOT EDIT! You must edit `redis_apt_backports`
 
 Dependencies
 ------------
@@ -55,5 +55,5 @@ GPLv2
 Author Information
 ------------------
 
-  - You can find many other roles in my GitHub "lab": https://github.com/HanXHX/my-ansible-playbooks
-  - All issues, pull-request are welcome :)
+- Twitter: [@hanxhx_](https://twitter.com/hanxhx_)
+- All issues, pull-requests are welcome :)
