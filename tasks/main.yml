@@ -1,8 +1,15 @@
 ---
 
-- name: APT | install redis
-  apt: pkg=redis-server state=present update_cache=yes cache_valid_time=3600 default_release={{ redis_apt_target }}
+- name: APT | Install redis
+  apt: >
+    pkg=redis-server
+    state=present
+    update_cache=yes
+    cache_valid_time=3600
+    default_release={{ redis_apt_target }}
 
 - name: TEMPLATE | Deploy Redis config file
-  template: src=etc/redis/redis.conf.j2 dest=/etc/redis/redis.conf
+  template: >
+    src=etc/redis/redis.conf.j2
+    dest=/etc/redis/redis.conf
   notify: restart redis

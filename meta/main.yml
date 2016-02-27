@@ -4,13 +4,18 @@ galaxy_info:
   description: Redis for Debian
   company:
   license: GPLv2
-  min_ansible_version: 1.2
+  min_ansible_version: 1.6
   platforms:
   - name: Debian
     versions:
     - wheezy
     - jessie
-  categories:
-  - database:nosql
+  galaxy_tags:
+  - database
+  - nosql
+  - debian
+  - keyvalue
+  - cache
+  - web
 dependencies: []
 

@@ -14,9 +14,9 @@ Requirements
 Role Variables
 --------------
 
-  - Default config file is defined in [default vars](defaults/main.yml). All config vars are prefixed with "redisconf\_".
-  - `redis_apt_backports`: set true to install Redis from backports (default is false).
-  - `redis_apt_target`: target used by apt module. DO NOT EDIT! You must edit `redis_apt_backports`
+- Default config file is defined in [default vars](defaults/main.yml).
+- `redis_apt_backports`: set true to install Redis from backports (default is false).
+- `redis_apt_target`: target used by apt module. DO NOT EDIT! You must edit `redis_apt_backports`
 
 Dependencies
 ------------
