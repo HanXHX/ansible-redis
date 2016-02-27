@@ -3,7 +3,7 @@ Redis Ansible
 
 [![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-HanXHX.redis-blue.svg)](https://galaxy.ansible.com/list#/roles/3989) [![Build Status](https://travis-ci.org/HanXHX/ansible-redis.svg)](https://travis-ci.org/HanXHX/ansible-redis)
 
-Install and configure [Redis](http://redis.io/).
+Install and configure [Redis](http://redis.io/). Manage replication.
 
 Requirements
 ------------

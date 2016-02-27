@@ -163,7 +163,11 @@ dir {{ redis_dir }}
 # so for example it is possible to configure the slave to save the DB with a
 # different interval, or to listen to another port, and so on.
 #
+{% if redis_masterauth_masterip is none or redis_masterauth_masterport is none %}
 # slaveof <masterip> <masterport>
+{% else %}
+slaveof {{ redis_masterauth_masterip }} {{ redis_masterauth_masterport }}
+{% endif %}
 
 # If the master is password protected (using the "requirepass" configuration
 # directive below) it is possible to tell the slave to authenticate before
