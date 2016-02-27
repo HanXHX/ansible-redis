@@ -170,7 +170,11 @@ dir {{ redis_dir }}
 # starting the replication synchronization process, otherwise the master will
 # refuse the slave request.
 #
+{% if redis_masterauth is none %}
 # masterauth <master-password>
+{% else %}
+masterauth {{ redis_masterauth }}
+{% endif %}
 
 # When a slave loses its connection with the master, or when the replication
 # is still in progress, the slave can act in two different ways:
@@ -259,7 +263,11 @@ slave-priority {{ redis_slave_priority }}
 # 150k passwords per second against a good box. This means that you should
 # use a very strong password otherwise it will be very easy to break.
 #
+{% if redis_requirepass is none %}
 # requirepass foobared
+{% else %}
+requirepass {{ redis_requirepass }}
+{% endif %}
 
 # Command renaming.
 #

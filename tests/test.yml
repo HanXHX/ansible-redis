@@ -3,18 +3,25 @@
 - hosts: all
   roles:
     - ../../
+  vars:
+    redis_requirepass: 'my_unsecure_password'
   post_tasks:
     - name: SET_FACT | Create vars
       set_fact:
         test_key: 'key_{{ 10000 | random }}'
         test_val: 'value_{{ 10000 | random }}'
+    - name: COMMAND | Check Auth is running (and fails auth)
+      command: redis-cli SET a 1
+      register: f
+      failed_when: f.stdout.find('Authentication required') == -1
+      changed_when: false
     - name: COMMAND | Test SET
-      command: redis-cli SET {{ test_key }} {{ test_val }}
+      command: redis-cli -a {{ redis_requirepass }} SET {{ test_key }} {{ test_val }}
       register: s
       failed_when: s.stdout.find('OK') == -1
       changed_when: false
     - name: COMMAND | Test GET
-      command: redis-cli GET {{ test_key }}
+      command: redis-cli -a {{ redis_requirepass }} GET {{ test_key }}
       register: g
       failed_when: g.stdout.find(test_val) == -1
       changed_when: false

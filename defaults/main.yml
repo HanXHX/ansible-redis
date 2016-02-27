@@ -50,4 +50,6 @@ redis_client_output_buffer_limit:
   - 'pubsub 32mb 8mb 60'
 redis_hz: '10'
 redis_aof_rewrite_incremental_fsync: 'yes'
+redis_masterauth: null
+redis_requirepass: null
 
