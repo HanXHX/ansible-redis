@@ -19,6 +19,9 @@
       shell: redis-server --port {{ redis_masterauth_masterport }} &
       changed_when: false
 
+    - name: PAUSE | 1 sec
+      pause: seconds=1
+
     - name: COMMAND | Check Auth is running (and fails auth)
       command: redis-cli SET a 1
       register: f
