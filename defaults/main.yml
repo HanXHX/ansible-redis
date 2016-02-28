@@ -56,3 +56,5 @@ redis_requirepass: null
 redis_masterauth: null
 redis_masterauth_masterip: null
 redis_masterauth_masterport: null
+redis_repl_ping_slave_period: null
+redis_repl_timeout: null
