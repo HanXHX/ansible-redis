@@ -19,3 +19,10 @@
     src=etc/redis/redis.conf.j2
     dest=/etc/redis/redis.conf
   notify: restart redis
+
+- name: LINEINFILE | Manage ulimit
+  lineinfile: >
+    line='{% if redis_ulimit is none %}# ULIMIT=65536{% else %}ULIMIT={{ redis_ulimit }}{% endif %}'
+    regexp='^(#\s)?ULIMIT'
+    dest=/etc/default/redis-server
+  notify: restart redis

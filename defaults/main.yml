@@ -2,6 +2,7 @@
 # Install
 # =====================
 redis_use_apt_backports: false
+redis_ulimit: null
 
 # =====================
 # Configuration

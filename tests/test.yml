@@ -4,6 +4,7 @@
   roles:
     - ../../
   vars:
+    redis_ulimit: 42000
     redis_requirepass: 'my_unsecure_password'
     redis_slaveof: '127.0.0.1:{{ redis_masterauth_masterport }}'
     redis_masterauth_masterip: '127.0.0.1'
