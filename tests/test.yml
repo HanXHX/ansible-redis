@@ -12,6 +12,10 @@
     redis_rename_command:
       - old: 'GET'
         new: '{{ test_get_renamed }}'
+    redis_maxclients: 10
+    redis_maxmemory: 65536000
+    redis_maxmemory_policy: 'volatile-lru'
+    redis_maxmemory_samples: 5
     test_get_renamed: 'get_renamed'
 
   post_tasks:

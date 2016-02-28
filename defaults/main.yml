@@ -64,3 +64,9 @@ redis_masterauth_masterip: null
 redis_masterauth_masterport: null
 redis_repl_ping_slave_period: null
 redis_repl_timeout: null
+
+# Limits
+redis_maxclients: null
+redis_maxmemory: null
+redis_maxmemory_policy: null
+redis_maxmemory_samples: null

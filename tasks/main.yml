@@ -1,5 +1,11 @@
 ---
 
+- name: ASSERT | Check vars
+  assert:
+    that:
+      - 'redis_maxmemory_policy is none or redis_maxmemory_policy in redis_maxmemory_policy_available'
+      - 'redis_maxmemory_samples is none or redis_maxmemory_policy in redis_maxmemory_samples_policies'
+
 - name: APT | Install redis
   apt: >
     pkg=redis-server
