@@ -9,6 +9,10 @@
     redis_masterauth_masterip: '127.0.0.1'
     redis_masterauth_masterport: 7777
     redis_masterauth: 'my_unsecure_password_on_master'
+    redis_rename_command:
+      - old: 'GET'
+        new: '{{ test_get_renamed }}'
+    test_get_renamed: 'get_renamed'
 
   post_tasks:
     - name: SET_FACT | Create vars
@@ -39,7 +43,7 @@
       pause: seconds=1
 
     - name: COMMAND | Test GET on slave
-      command: redis-cli -a {{ redis_requirepass }} GET {{ test_key }}
+      command: redis-cli -a {{ redis_requirepass }} {{ test_get_renamed }} {{ test_key }}
       register: g
       failed_when: g.stdout.find(test_val) == -1
       changed_when: false

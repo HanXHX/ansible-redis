@@ -52,6 +52,12 @@ redis_hz: '10'
 redis_aof_rewrite_incremental_fsync: 'yes'
 redis_requirepass: null
 
+# Example:
+# redis_rename_command:
+#   - old: 'SET'
+#     new: 'obfucated___SET'
+redis_rename_command: []
+
 # Replication
 redis_masterauth: null
 redis_masterauth_masterip: null

@@ -299,6 +299,9 @@ requirepass {{ redis_requirepass }}
 #
 # Please note that changing the name of commands that are logged into the
 # AOF file or transmitted to slaves may cause problems.
+{% for c in redis_rename_command %}
+rename-command {{ c.old }} {{ c.new }}
+{% endfor %}
 
 ################################### LIMITS ####################################
 
