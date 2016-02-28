@@ -8,7 +8,7 @@ Install and configure [Redis](http://redis.io/). Manage replication.
 Requirements
 ------------
 
-- Only Debian Wheezy or Jessie.
+- Debian Jessie.
 - If you want to install Redis from backports, you must use add this repository.
 
 Role Variables

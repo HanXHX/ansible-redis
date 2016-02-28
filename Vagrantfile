@@ -6,7 +6,6 @@
 Vagrant.configure("2") do |config|
 
   vms = [
-    [ "debian-wheezy", "debian/wheezy64" ],
     [ "debian-jessie", "debian/jessie64" ]
   ]
 
