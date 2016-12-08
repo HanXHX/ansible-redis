@@ -6,12 +6,16 @@
       - 'redis_maxmemory_policy is none or redis_maxmemory_policy in redis_maxmemory_policy_available'
       - 'redis_maxmemory_samples is none or redis_maxmemory_policy in redis_maxmemory_samples_policies'
 
+- name: APT | Update cache
+  apt: >
+    update_cache=yes
+    cache_valid_time=3600
+  changed_when: false
+
 - name: APT | Install redis
   apt: >
     pkg=redis-server
     state=present
-    update_cache=yes
-    cache_valid_time=3600
     default_release={{ redis_apt_target }}
 
 - name: TEMPLATE | Deploy Redis config file
