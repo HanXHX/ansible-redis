@@ -18,7 +18,7 @@
 
 - name: LINEINFILE | Add include in config file
   lineinfile:
-    path: /etc/redis/redis.conf
+    dest: /etc/redis/redis.conf
     line: "include /etc/redis/redis.conf.local"
     insertafter: EOF
   notify: restart redis
