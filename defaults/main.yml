@@ -7,62 +7,50 @@ redis_ulimit: null
 # =====================
 # Configuration
 # =====================
-redis_daemonize: 'yes'
-redis_pidfile: '/var/run/redis/redis-server.pid'
-redis_port: '6379'
-redis_bind: '127.0.0.1'
-redis_timeout: '0'
-redis_tcp_keepalive: '0'
-redis_loglevel: 'notice'
-redis_logfile: '/var/log/redis/redis-server.log'
-redis_databases: '16'
-redis_save:
-  - '900 1'
-  - '300 10'
-  - '60 10000'
-redis_stop_writes_on_bgsave_error: 'yes'
-redis_rdbcompression: 'yes'
-redis_rdbchecksum: 'yes'
-redis_dbfilename: 'dump.rdb'
-redis_dir: '/var/lib/redis'
-redis_slave_serve_stale_data: 'yes'
-redis_slave_read_only: 'yes'
-redis_repl_disable_tcp_nodelay: 'no'
-redis_slave_priority: '100'
-redis_appendonly: 'no'
-redis_appendfsync: 'everysec'
-redis_no_appendfsync_on_rewrite: 'no'
-redis_auto_aof_rewrite_percentage: '100'
-redis_auto_aof_rewrite_min_size: '64mb'
-redis_lua_time_limit: '5000'
-redis_slowlog_log_slower_than: '10000'
-redis_slowlog_max_len: '128'
-redis_hash_max_ziplist_entries: '512'
-redis_hash_max_ziplist_value: '64'
-redis_list_max_ziplist_entries: '512'
-redis_list_max_ziplist_value: '64'
-redis_set_max_intset_entries: '512'
-redis_zset_max_ziplist_entries: '128'
-redis_zset_max_ziplist_value: '64'
-redis_activerehashing: 'yes'
-redis_client_output_buffer_limit:
-  - 'normal 0 0 0'
-  - 'slave 256mb 64mb 60'
-  - 'pubsub 32mb 8mb 60'
-redis_hz: '10'
-redis_aof_rewrite_incremental_fsync: 'yes'
+redis_daemonize: null
+redis_pidfile: null
+redis_port: null
+redis_bind: null
+redis_timeout: null
+redis_tcp_keepalive: null
+redis_loglevel: null
+redis_logfile: null
+redis_databases: null
+redis_save: []
+redis_stop_writes_on_bgsave_error: null
+redis_rdbcompression: null
+redis_rdbchecksum: null
+redis_dbfilename: null
+redis_dir: null
+redis_slave_serve_stale_data: null
+redis_slave_read_only: null
+redis_repl_disable_tcp_nodelay: null
+redis_slave_priority: null
+redis_appendonly: null
+redis_appendfsync: null
+redis_no_appendfsync_on_rewrite: null
+redis_auto_aof_rewrite_percentage: null
+redis_auto_aof_rewrite_min_size: null
+redis_lua_time_limit: null
+redis_slowlog_log_slower_than: null
+redis_slowlog_max_len: null
+redis_hash_max_ziplist_entries: null
+redis_hash_max_ziplist_value: null
+redis_list_max_ziplist_entries: null
+redis_list_max_ziplist_value: null
+redis_set_max_intset_entries: null
+redis_zset_max_ziplist_entries: null
+redis_zset_max_ziplist_value: null
+redis_activerehashing: null
+redis_client_output_buffer_limit: []
+redis_hz: null
+redis_aof_rewrite_incremental_fsync: null
 redis_requirepass: null
-
-# Example:
-# redis_rename_command:
-#   - old: 'SET'
-#     new: 'obfucated___SET'
-redis_rename_command: []
+redis_rename: []
 
 # Replication
 redis_masterauth: null
-redis_masterauth_masterip: null
-redis_masterauth_masterport: null
+redis_slaveof: null
 redis_repl_ping_slave_period: null
 redis_repl_timeout: null
 

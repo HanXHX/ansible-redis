@@ -8,8 +8,8 @@ Install and configure [Redis](http://redis.io/). Manage replication.
 Requirements
 ------------
 
-- Debian Jessie.
 - If you want to install Redis from backports, you must use add this repository.
+- If redis is already installed by hand (or other process). Please uninstall and purge configuration files. This role uses default config file and overwrite config in another file.
 
 Role Variables
 --------------
@@ -22,7 +22,7 @@ Role Variables
 Dependencies
 ------------
 
-None. But you can add explicitely my [Dotdeb role](https://galaxy.ansible.com/list#/roles/3970) to have the latest version of Redis!
+None. But you can add explicitely my [Dotdeb role](https://galaxy.ansible.com/list#/roles/3970) to have the latest version of Redis on Jessie!
 
 Example Playbook
 ----------------

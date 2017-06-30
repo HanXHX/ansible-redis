@@ -1,32 +1,36 @@
 ---
 
 - hosts: all
+  pre_tasks:
   roles:
     - ../../
   vars:
     redis_ulimit: 42000
     redis_requirepass: 'my_unsecure_password'
-    redis_slaveof: '127.0.0.1:{{ redis_masterauth_masterport }}'
-    redis_masterauth_masterip: '127.0.0.1'
-    redis_masterauth_masterport: 7777
+    redis_slaveof: "127.0.0.1 7777"
     redis_masterauth: 'my_unsecure_password_on_master'
-    redis_rename_command:
-      - old: 'GET'
-        new: '{{ test_get_renamed }}'
+    redis_rename:
+      - "GET {{ test_get_renamed }}"
     redis_maxclients: 10
     redis_maxmemory: 65536000
     redis_maxmemory_policy: 'volatile-lru'
     redis_maxmemory_samples: 5
     test_get_renamed: 'get_renamed'
+    masterip: '127.0.0.1'
+    masterport: 7777
 
   post_tasks:
+
+    - name: SERVICE | Ensure redis is started
+      service: name=redis-server state=started
+
     - name: SET_FACT | Create vars
       set_fact:
         test_key: 'key_{{ 10000 | random }}'
         test_val: 'value_{{ 10000 | random }}'
 
     - name: SHELL | Start master Redis
-      shell: echo 'requirepass {{ redis_masterauth }}' | redis-server - --port {{ redis_masterauth_masterport }} &
+      shell: echo 'requirepass {{ redis_masterauth }}' | redis-server - --port {{ masterport }} &
       changed_when: false
 
     - name: PAUSE | 1 sec
@@ -39,7 +43,7 @@
       changed_when: false
 
     - name: COMMAND | Test SET on master
-      command: redis-cli -a {{ redis_masterauth }} -p {{ redis_masterauth_masterport }} SET {{ test_key }} {{ test_val }}
+      command: redis-cli -a {{ redis_masterauth }} -p {{ masterport }} SET {{ test_key }} {{ test_val }}
       register: s
       failed_when: s.stdout.find('OK') == -1
       changed_when: false
@@ -54,5 +58,5 @@
       changed_when: false
 
     - name: SHELL | Kill master Redis
-      shell: ps aux | grep -v awk | awk '/redis-server / && /{{ redis_masterauth_masterport }}/ { print $2 }' | xargs -n1 kill
+      shell: ps aux | grep -v awk | awk '/redis-server / && /{{ masterport }}/ { print $2 }' | xargs -n1 kill
       changed_when: false

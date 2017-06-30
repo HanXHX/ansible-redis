@@ -1,0 +1,38 @@
+#
+# {{ ansible_managed }}
+#
+
+{% if redis_save | length > 0 %}
+{% for v in redis_save %}
+save {{ v }}
+{% endfor %}
+{% else %}
+# save default config
+save 900 1
+save 300 10
+save 60 10000
+{% endif %}
+
+{% if redis_rename | length > 0 %}
+{% for c in redis_rename %}
+rename-command {{ c }}
+{% endfor %}
+{% endif %}
+
+{% if redis_client_output_buffer_limit | length > 0 %}
+{% for v in redis_client_output_buffer_limit %}
+client-output-buffer-limit {{ v }}
+{% endfor %}
+{% else %}
+# client_output_buffer_limit Default config
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit slave 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+{% endif %}
+
+# Config overwrited
+{% for k in redis_config_key %}
+{% if vars[k] is not none %}
+{{ k | replace('redis_', '') | replace('_', '-') }} {{ vars[k] }}
+{% endif %}
+{% endfor %}
