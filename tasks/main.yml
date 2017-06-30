@@ -11,10 +11,10 @@
   changed_when: false
 
 - name: APT | Install redis
-  apt: >
-    pkg=redis-server
-    state=present
-    default_release="{{ redis_apt_target }}"
+  apt:
+    pkg: redis-server
+    state: present
+    default_release: "{{ redis_apt_target }}"
 
 - name: LINEINFILE | Add include in config file
   lineinfile:
@@ -30,14 +30,14 @@
   notify: restart redis
 
 - name: TEMPLATE | Deploy Redis config file
-  template: >
-    src=etc/redis/redis.conf.local.j2
-    dest=/etc/redis/redis.conf.local
+  template:
+    src: etc/redis/redis.conf.local.j2
+    dest: /etc/redis/redis.conf.local
   notify: restart redis
 
 - name: LINEINFILE | Manage ulimit
   lineinfile: >
-    line='{% if redis_ulimit is none %}# ULIMIT=65536{% else %}ULIMIT={{ redis_ulimit }}{% endif %}'
-    regexp='^(#\s)?ULIMIT'
-    dest=/etc/default/redis-server
+    line: '{% if redis_ulimit is none %}# ULIMIT=65536{% else %}ULIMIT={{ redis_ulimit }}{% endif %}'
+    regexp: '^(#\s)?ULIMIT'
+    dest: /etc/default/redis-server
   notify: restart redis
