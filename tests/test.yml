@@ -22,7 +22,9 @@
   post_tasks:
 
     - name: SERVICE | Ensure redis is started
-      service: name=redis-server state=started
+      service:
+        name: redis-server
+        state: started
 
     - name: SET_FACT | Create vars
       set_fact:
@@ -34,7 +36,8 @@
       changed_when: false
 
     - name: PAUSE | 1 sec
-      pause: seconds=1
+      pause:
+        seconds: 1
 
     - name: COMMAND | Check Auth is running (and fails auth)
       command: redis-cli SET a 1
@@ -49,7 +52,8 @@
       changed_when: false
 
     - name: PAUSE | 1 sec
-      pause: seconds=1
+      pause:
+        seconds: 1
 
     - name: COMMAND | Test GET on slave
       command: redis-cli -a {{ redis_requirepass }} {{ test_get_renamed }} {{ test_key }}

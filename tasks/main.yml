@@ -7,7 +7,9 @@
       - 'redis_maxmemory_samples is none or redis_maxmemory_policy in redis_maxmemory_samples_policies'
 
 - name: APT | Update cache
-  apt: update_cache=yes cache_valid_time=3600
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
   changed_when: false
 
 - name: APT | Install redis
@@ -23,11 +25,14 @@
     insertafter: EOF
   notify: restart redis
 
-- name: COMMAND | Disable config multiline
-  command: sed -ri 's/^({{ item }}.*)/# \1/g' /etc/redis/redis.conf
-  with_items: ['save', 'client-output-buffer-limit']
-  changed_when: false
+- name: REPLACE | Disable config multiline
+  replace:
+    path: /etc/redis/redis.conf
+    regexp: '^({{ item }}.*)'
+    replace: '# \1'
+  loop: ['save', 'client-output-buffer-limit']
   notify: restart redis
+
 
 - name: TEMPLATE | Deploy Redis config file
   template:
