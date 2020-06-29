@@ -6,13 +6,13 @@
 Vagrant.configure("2") do |config|
 
   vms = [
-    { :name => "debian-jessie", :box => "debian/jessie64" },
-    { :name => "debian-stretch", :box => "debian/stretch64" }
+    { :name => "debian-stretch", :box => "debian/stretch64" },
+    { :name => "debian-buster", :box => "debian/buster64" },
   ]
 
   conts = [
-    { :name => "docker-debian-jessie", :docker => "hanxhx/vagrant-ansible:debian8" },
-    { :name => "docker-debian-stretch", :docker => "hanxhx/vagrant-ansible:debian9" }
+    { :name => "docker-debian-stretch", :docker => "hanxhx/vagrant-ansible:debian9" },
+    { :name => "docker-debian-buster", :docker => "hanxhx/vagrant-ansible:debian9" }
   ]
 
   config.vm.network "private_network", type: "dhcp"

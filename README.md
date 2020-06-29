@@ -22,7 +22,7 @@ Role Variables
 Dependencies
 ------------
 
-None. But you can add explicitely my [Dotdeb role](https://galaxy.ansible.com/list#/roles/3970) to have the latest version of Redis on Jessie!
+None.
 
 Example Playbook
 ----------------
@@ -31,13 +31,6 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: HanXHX.redis }
-
-### Redis from Dotdeb
-
-    - hosts: servers
-      roles:
-         - { role: HanXHX.dotdeb }
          - { role: HanXHX.redis }
 
 ### Redis from Backports
