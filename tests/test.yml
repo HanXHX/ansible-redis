@@ -1,11 +1,10 @@
 ---
 
 - hosts: all
-  pre_tasks:
   roles:
     - ../../
   vars:
-    redis_bind: '{{ (ansible_all_ipv4_addresses + ["127.0.0.1"]) | join(" ") }}'
+    redis_bind: '{% if ansible_virtualization_type == "docker" %}{{ ["127.0.0.1", "127.0.0.2"] | join(" ") }}{% else %}{{ (ansible_all_ipv4_addresses + ["127.0.0.1"]) | join(" ") }}{% endif %}'
     redis_ulimit: 42000
     redis_requirepass: 'my_unsecure_password'
     redis_slaveof: "127.0.0.1 7777"
