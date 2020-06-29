@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   conts = [
     { :name => "docker-debian-stretch", :docker => "hanxhx/vagrant-ansible:debian9" },
-    { :name => "docker-debian-buster", :docker => "hanxhx/vagrant-ansible:debian9" }
+    { :name => "docker-debian-buster", :docker => "hanxhx/vagrant-ansible:debian10" }
   ]
 
   config.vm.network "private_network", type: "dhcp"
