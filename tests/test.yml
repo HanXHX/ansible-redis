@@ -5,6 +5,7 @@
   roles:
     - ../../
   vars:
+    redis_bind: '{{ (ansible_all_ipv4_addresses + ["127.0.0.1"]) | join(" ") }}'
     redis_ulimit: 42000
     redis_requirepass: 'my_unsecure_password'
     redis_slaveof: "127.0.0.1 7777"
@@ -16,7 +17,6 @@
     redis_maxmemory_policy: 'volatile-lru'
     redis_maxmemory_samples: 5
     test_get_renamed: 'get_renamed'
-    masterip: '127.0.0.1'
     masterport: 7777
 
   post_tasks:

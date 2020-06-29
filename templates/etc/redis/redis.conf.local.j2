@@ -33,6 +33,6 @@ client-output-buffer-limit pubsub 32mb 8mb 60
 # Config overwrited
 {% for k in redis_config_key %}
 {% if vars[k] is not none %}
-{{ k | replace('redis_', '') | replace('_', '-') }} {{ vars[k] }}
+{{ k | replace('redis_', '') | replace('_', '-') }} {{ lookup('vars', k) }}
 {% endif %}
 {% endfor %}
