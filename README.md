@@ -5,6 +5,16 @@ Redis Ansible
 
 Install and configure [Redis](http://redis.io/). Manage replication.
 
+Managed OS
+----------
+
+|     OS Release       |        Status      |
+|:--------------------:|:------------------:|
+| Debian Stretch (9)   | :heavy_check_mark: |
+| Debian Buster (10)   | :heavy_check_mark: |
+| Debian Bullseye (11) | :heavy_check_mark: |
+
+
 Requirements
 ------------
 

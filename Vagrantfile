@@ -6,13 +6,15 @@
 Vagrant.configure("2") do |config|
 
   vms = [
-    { :name => "debian-stretch", :box => "debian/stretch64" },
-    { :name => "debian-buster", :box => "debian/buster64" },
+    { :name => "vbox-debian-stretch",  :box => "debian/stretch64" },
+    { :name => "vbox-debian-buster",   :box => "debian/buster64" },
+    { :name => "vbox-debian-bullseye", :box => "debian/bullseye64" },
   ]
 
   conts = [
-    { :name => "docker-debian-stretch", :docker => "hanxhx/vagrant-ansible:debian9" },
-    { :name => "docker-debian-buster", :docker => "hanxhx/vagrant-ansible:debian10" }
+    { :name => "docker-debian-stretch",  :docker => "hanxhx/vagrant-ansible:debian9" },
+    { :name => "docker-debian-buster",   :docker => "hanxhx/vagrant-ansible:debian10" },
+    { :name => "docker-debian-bullseye", :docker => "hanxhx/vagrant-ansible:debian11" }
   ]
 
   config.vm.network "private_network", type: "dhcp"
@@ -24,6 +26,11 @@ Vagrant.configure("2") do |config|
         d.remains_running = true
         d.has_ssh = true
       end
+
+      if opts[:name].include? "bullseye"
+        m.vm.provision "shell", inline: "[ -f '/root/first_provision' ] || (apt-get update -qq && apt-get -y dist-upgrade && touch /root/first_provision)"
+      end
+
       m.vm.provision "ansible" do |ansible|
         ansible.playbook = "tests/test.yml"
         ansible.verbose = 'vv'
@@ -39,11 +46,16 @@ Vagrant.configure("2") do |config|
         v.cpus = 1
         v.memory = 256
       end
-       m.vm.provision "ansible" do |ansible|
-         ansible.playbook = "tests/test.yml"
-         ansible.verbose = 'vv'
-         ansible.become = true
-       end
+
+      if opts[:name].include? "bullseye"
+        m.vm.provision "shell", inline: "[ -f '/root/first_provision' ] || (apt-get update -qq && apt-get -y dist-upgrade && touch /root/first_provision)"
+      end
+
+      m.vm.provision "ansible" do |ansible|
+        ansible.playbook = "tests/test.yml"
+        ansible.verbose = 'vv'
+        ansible.become = true
+      end
     end
   end
 end
