@@ -31,7 +31,9 @@
         test_val: 'value_{{ 10000 | random }}'
 
     - name: SHELL | Start master Redis
-      shell: echo 'requirepass {{ redis_masterauth }}' | redis-server - --port {{ masterport }} &
+      shell: set -o pipefail && echo 'requirepass {{ redis_masterauth }}' | redis-server - --port {{ masterport }} &
+      args:
+        executable: /bin/bash
       changed_when: false
 
     - name: PAUSE | 1 sec
@@ -61,5 +63,7 @@
       changed_when: false
 
     - name: SHELL | Kill master Redis
-      shell: ps aux | grep -v awk | awk '/redis-server / && /{{ masterport }}/ { print $2 }' | xargs -n1 kill
+      shell: set -o pipefail && ps aux | grep -v awk | awk '/redis-server / && /{{ masterport }}/ { print $2 }' | xargs -n1 kill
+      args:
+        executable: /bin/bash
       changed_when: false

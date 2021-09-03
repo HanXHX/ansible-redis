@@ -54,12 +54,12 @@ redis_config_key:
   - 'redis_hz'
   - 'redis_aof_rewrite_incremental_fsync'
   - 'redis_requirepass'
-# Replication
+  # Replication
   - 'redis_masterauth'
   - 'redis_slaveof'
   - 'redis_repl_ping_slave_period'
   - 'redis_repl_timeout'
-# Limits
+  # Limits
   - 'redis_maxclients'
   - 'redis_maxmemory'
   - 'redis_maxmemory_policy'

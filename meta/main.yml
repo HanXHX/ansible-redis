@@ -1,6 +1,8 @@
 ---
 
 galaxy_info:
+  role_name: redis
+  namespace: hanxhx
   author: Emilien Mantel
   description: Redis for Debian
   company:

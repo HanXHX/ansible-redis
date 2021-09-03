@@ -33,11 +33,13 @@
   loop: ['save', 'client-output-buffer-limit']
   notify: restart redis
 
-
 - name: TEMPLATE | Deploy Redis config file
   template:
     src: etc/redis/redis.conf.local.j2
     dest: /etc/redis/redis.conf.local
+    mode: 0640
+    owner: redis
+    group: redis
   notify: restart redis
 
 - name: LINEINFILE | Manage ulimit
