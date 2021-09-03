@@ -1,32 +1,32 @@
 ---
 
 - name: ASSERT | Check vars
-  assert:
+  ansible.builtin.assert:
     that:
       - 'redis_maxmemory_policy is none or redis_maxmemory_policy in redis_maxmemory_policy_available'
       - 'redis_maxmemory_samples is none or redis_maxmemory_policy in redis_maxmemory_samples_policies'
 
 - name: APT | Update cache
-  apt:
+  ansible.builtin.apt:
     update_cache: true
     cache_valid_time: 3600
   changed_when: false
 
 - name: APT | Install redis
-  apt:
+  ansible.builtin.apt:
     pkg: redis-server
     state: present
     default_release: "{{ redis_apt_target }}"
 
 - name: LINEINFILE | Add include in config file
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/redis/redis.conf
     line: "include /etc/redis/redis.conf.local"
     insertafter: EOF
   notify: restart redis
 
 - name: REPLACE | Disable config multiline
-  replace:
+  ansible.builtin.replace:
     path: /etc/redis/redis.conf
     regexp: '^({{ item }}.*)'
     replace: '# \1'
@@ -34,7 +34,7 @@
   notify: restart redis
 
 - name: TEMPLATE | Deploy Redis config file
-  template:
+  ansible.builtin.template:
     src: etc/redis/redis.conf.local.j2
     dest: /etc/redis/redis.conf.local
     mode: 0640
@@ -43,7 +43,7 @@
   notify: restart redis
 
 - name: LINEINFILE | Manage ulimit
-  lineinfile:
+  ansible.builtin.lineinfile:
     line: '{% if redis_ulimit is none %}# ULIMIT=65536{% else %}ULIMIT={{ redis_ulimit }}{% endif %}'
     regexp: '^(#\s)?ULIMIT'
     dest: /etc/default/redis-server

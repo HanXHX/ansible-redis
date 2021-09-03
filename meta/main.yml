@@ -7,7 +7,7 @@ galaxy_info:
   description: Redis for Debian
   company:
   license: GPLv2
-  min_ansible_version: 2.5
+  min_ansible_version: 2.11
   platforms:
     - name: Debian
       versions:

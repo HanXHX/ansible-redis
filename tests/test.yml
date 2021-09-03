@@ -21,49 +21,49 @@
   post_tasks:
 
     - name: SERVICE | Ensure redis is started
-      service:
+      ansible.builtin.service:
         name: redis-server
         state: started
 
     - name: SET_FACT | Create vars
-      set_fact:
+      ansible.builtin.set_fact:
         test_key: 'key_{{ 10000 | random }}'
         test_val: 'value_{{ 10000 | random }}'
 
     - name: SHELL | Start master Redis
-      shell: set -o pipefail && echo 'requirepass {{ redis_masterauth }}' | redis-server - --port {{ masterport }} &
+      ansible.builtin.shell: set -o pipefail && echo 'requirepass {{ redis_masterauth }}' | redis-server - --port {{ masterport }} &
       args:
         executable: /bin/bash
       changed_when: false
 
     - name: PAUSE | 1 sec
-      pause:
+      ansible.builtin.pause:
         seconds: 1
 
     - name: COMMAND | Check Auth is running (and fails auth)
-      command: redis-cli SET a 1
+      ansible.builtin.command: redis-cli SET a 1
       register: f
       failed_when: f.stdout.find('Authentication required') == -1
       changed_when: false
 
     - name: COMMAND | Test SET on master
-      command: redis-cli -a {{ redis_masterauth }} -p {{ masterport }} SET {{ test_key }} {{ test_val }}
+      ansible.builtin.command: redis-cli -a {{ redis_masterauth }} -p {{ masterport }} SET {{ test_key }} {{ test_val }}
       register: s
       failed_when: s.stdout.find('OK') == -1
       changed_when: false
 
     - name: PAUSE | 1 sec
-      pause:
+      ansible.builtin.pause:
         seconds: 1
 
     - name: COMMAND | Test GET on slave
-      command: redis-cli -a {{ redis_requirepass }} {{ test_get_renamed }} {{ test_key }}
+      ansible.builtin.command: redis-cli -a {{ redis_requirepass }} {{ test_get_renamed }} {{ test_key }}
       register: g
       failed_when: g.stdout.find(test_val) == -1
       changed_when: false
 
     - name: SHELL | Kill master Redis
-      shell: set -o pipefail && ps aux | grep -v awk | awk '/redis-server / && /{{ masterport }}/ { print $2 }' | xargs -n1 kill
+      ansible.builtin.shell: set -o pipefail && ps aux | grep -v awk | awk '/redis-server / && /{{ masterport }}/ { print $2 }' | xargs -n1 kill
       args:
         executable: /bin/bash
       changed_when: false
