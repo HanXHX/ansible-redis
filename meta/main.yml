@@ -1,4 +1,5 @@
 ---
+
 galaxy_info:
   author: Emilien Mantel
   description: Redis for Debian
@@ -6,17 +7,17 @@ galaxy_info:
   license: GPLv2
   min_ansible_version: 2.5
   platforms:
-  - name: Debian
-    versions:
-    - stretch
-    - buster
+    - name: Debian
+      versions:
+        - stretch
+        - buster
   galaxy_tags:
-  - database
-  - nosql
-  - debian
-  - keyvalue
-  - cache
-  - web
-  - redis
-dependencies: []
+    - database
+    - nosql
+    - debian
+    - keyvalue
+    - cache
+    - web
+    - redis
 
+dependencies: []
